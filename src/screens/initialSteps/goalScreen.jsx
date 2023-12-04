@@ -5,49 +5,58 @@ import { Button, Icon } from '@rneui/themed'
 import { Col, Grid, Row } from 'react-native-easy-grid';
 
 export default function GoalScreen({ navigation }) {
-    const [goals, setGoals] = useState({
-        loseWeight: false,
-        gainWeight: false,
-        gainMuscle: false
-    })
-    const handlePress = (text, input) => {
-        setGoals({ ...goals, [text]: input })
-    }
+    const [goal, setGoal] = useState('')
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <Grid style={{ paddingHorizontal: 20 }}>
                 <Row size={15}>
                     <Col>
-                        <Text style={{ fontFamily: "Pop600", fontSize: 24, color: "#303030", textAlign: "center" }}>Select Your Goal</Text>
+                        <Text style={styles.forgotHeading}>Select Your Goal</Text>
                     </Col>
                 </Row>
                 <Row size={65} style={{ alignItems: "flex-start" }}>
                     <Col>
-                        <View style={{ padding: 20, marginBottom: 10, borderRadius: 6, backgroundColor: goals.loseWeight ? "#F4F4F7" : "white", borderColor: goals.loseWeight ? "#484FA3" : "white", borderWidth: 2 }}>
-                            <Pressable onPress={() => { handlePress('loseWeight', !goals.loseWeight) }}>
-                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <View
+                            style={[styles.goalItem, {
+                                backgroundColor: goal === 'loseWeight' ? "#F4F4F7" : "white",
+                                borderColor: goal === 'loseWeight' ? "#484FA3" : "white",
+                            }]}
+                        >
+                            <Pressable onPress={() => { setGoal('loseWeight') }}>
+                                <View style={styles.goalItemImageWrapper}>
                                     <Image source={require('../../../assets/images/goal-1.png')} />
-                                    <Text style={{ color: "#303030", fontSize: 20, fontFamily: "Pop500", paddingLeft: 10 }}>Lose Weight</Text>
+                                    <Text style={styles.goalItemTitle}>Lose Weight</Text>
                                 </View>
-                                <Text style={{ paddingTop: 8, color: "#8C8C8C", fontSize: 16, fontFamily: "Pop400" }}>This is used to set up reccomendations just for you.</Text>
+                                <Text style={styles.goalItemSubTitle}>This is used to set up reccomendations just for you.</Text>
                             </Pressable>
                         </View>
-                        <View style={{ padding: 20, marginBottom: 10, borderRadius: 6, backgroundColor: goals.gainWeight ? "#F4F4F7" : "white", borderColor: goals.gainWeight ? "#484FA3" : "white", borderWidth: 2 }}>
-                            <Pressable onPress={() => { handlePress('gainWeight', !goals.gainWeight) }}>
-                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <View
+                            style={[styles.goalItem, {
+                                backgroundColor: goal === "gainWeight" ? "#F4F4F7" : "white",
+                                borderColor: goal === "gainWeight" ? "#484FA3" : "white"
+                            }]}
+                        >
+                            <Pressable onPress={() => { setGoal('gainWeight') }}>
+                                <View style={styles.goalItemImageWrapper}>
                                     <Image source={require('../../../assets/images/goal-2.png')} />
-                                    <Text style={{ color: "#303030", fontSize: 20, fontFamily: "Pop500", paddingLeft: 10 }}>Gain Weight</Text>
+                                    <Text style={styles.goalItemTitle}>Gain Weight</Text>
                                 </View>
-                                <Text style={{ paddingTop: 8, color: "#8C8C8C", fontSize: 16, fontFamily: "Pop400" }}>This is used to set up reccomendations just for you.</Text>
+                                <Text style={styles.goalItemSubTitle}>This is used to set up reccomendations just for you.</Text>
                             </Pressable>
                         </View>
-                        <View style={{ padding: 20, marginBottom: 10, borderRadius: 6, backgroundColor: goals.gainMuscle ? "#F4F4F7" : "white", borderColor: goals.gainMuscle ? "#484FA3" : "white", borderWidth: 2 }}>
-                            <Pressable onPress={() => { handlePress('gainMuscle', !goals.gainMuscle) }}>
-                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <View
+                            style={[styles.goalItem, {
+                                backgroundColor: goal === 'gainMuscle' ? "#F4F4F7" : "white",
+                                borderColor: goal === 'gainMuscle' ? "#484FA3" : "white"
+                            }]}
+                        >
+                            <Pressable onPress={() => { setGoal('gainMuscle') }}>
+                                <View style={styles.goalItemImageWrapper}>
                                     <Image source={require('../../../assets/images/goal-3.png')} />
-                                    <Text style={{ color: "#303030", fontSize: 20, fontFamily: "Pop500", paddingLeft: 10 }}>Gain Muscle</Text>
+                                    <Text style={styles.goalItemTitle}>Gain Muscle</Text>
                                 </View>
-                                <Text style={{ paddingTop: 8, color: "#8C8C8C", fontSize: 16, fontFamily: "Pop400" }}>This is used to set up reccomendations just for you.</Text>
+                                <Text style={styles.goalItemSubTitle}>This is used to set up reccomendations just for you.</Text>
                             </Pressable>
                         </View>
                     </Col>
@@ -56,8 +65,8 @@ export default function GoalScreen({ navigation }) {
                     <Col>
                         <Button
                             title={'Continue'}
-                            buttonStyle={{ marginBottom: 20, paddingVertical: 15, borderRadius: 6, backgroundColor: "#484FA3" }}
-                            titleStyle={{ fontFamily: "Pop600" }}
+                            buttonStyle={styles.coloredBtn}
+                            titleStyle={{ fontFamily: "Pop600", fontSize: 16 }}
                             onPress={() => { navigation.navigate('activitySelect') }}
                         />
                     </Col>

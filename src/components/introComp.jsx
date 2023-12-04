@@ -12,7 +12,7 @@ export default function IntroComp({ navigation }) {
 
     const styles = StyleSheet.create({
         slide: { height: windowHeight, width: windowWidth, justifyContent: "center", alignItems: "center", },
-        pagination: { position: "absolute", bottom: 60, width: "100%", justifyContent: "center", flexDirection: "row", },
+        pagination: { position: "absolute", bottom: 30, width: "100%", justifyContent: "center", flexDirection: "row", },
         paginationDot: { width: 20, height: 8, borderRadius: 4, marginHorizontal: 2, },
         paginationDotActive: { backgroundColor: "#FDD64D" },
         paginationDotInactive: { backgroundColor: "#EEEEEE" },

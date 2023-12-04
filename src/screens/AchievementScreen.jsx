@@ -8,7 +8,7 @@ import AchievementComp from '../components/achievementComp'
 
 export default function AchievementScreen() {
     return (
-        <SafeAreaView style={[styles.screenContainer, { paddingTop: 20 }]}>
+        <SafeAreaView style={[styles.screenContainer]}>
             <ScrollView contentContainerStyle={{ paddingTop: 20 }}>
                 <HeaderComp />
                 <View style={{ paddingHorizontal: 20 }}>

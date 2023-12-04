@@ -1,13 +1,12 @@
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import { styles } from "../styles";
-import { Col, Grid, Row } from "react-native-easy-grid";
+import { Col, Row } from "react-native-easy-grid";
 import CategorySlider from "../components/categorySlider";
 import HeaderComp from "../components/headerComp";
-import { Avatar, Icon } from "@rneui/themed";
 
 export default function WelcomeScreen({ navigation }) {
     return (
-        <SafeAreaView style={[styles.screenContainer, { paddingTop: 20 }]}>
+        <SafeAreaView style={[styles.screenContainer]}>
             <ScrollView contentContainerStyle={{ paddingTop: 20 }}>
                 <HeaderComp />
                 <Row>
@@ -39,7 +38,6 @@ export default function WelcomeScreen({ navigation }) {
                         >
                             Recommended
                         </Text>
-
                     </Col>
                 </Row>
             </ScrollView>

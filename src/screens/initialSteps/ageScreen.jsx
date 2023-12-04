@@ -12,8 +12,8 @@ export default function AgeScreen({ navigation }) {
             <Grid style={{ paddingHorizontal: 20 }}>
                 <Row size={15}>
                     <Col>
-                        <Text style={{ fontFamily: "Pop600", fontSize: 24, color: "#303030", textAlign: "center" }}>How old are you??</Text>
-                        <Text style={{ fontFamily: "Pop400", fontSize: 16, color: "#838383", textAlign: "center", lineHeight: 24 }}>This is used to set up reccomendations just for you.</Text>
+                        <Text style={styles.forgotHeading}>How old are you??</Text>
+                        <Text style={styles.forgotSubText}>This is used to set up reccomendations just for you.</Text>
                     </Col>
                 </Row>
                 <Row size={40} style={{ justifyContent: "center", alignItems: "center" }}>
@@ -44,12 +44,12 @@ export default function AgeScreen({ navigation }) {
                 <Row size={15} style={{ justifyContent: "center" }}>
                     <Text style={{ textAlign: "center", color: "#ACACAC", fontSize: 14, fontFamily: "Pop400" }}>You can change this any time later</Text>
                 </Row>
-                <Row size={30} style={{alignItems:"flex-end"}}>
+                <Row size={30} style={{ alignItems: "flex-end" }}>
                     <Col>
                         <Button
                             title={'Continue'}
-                            buttonStyle={{ marginBottom: 20, paddingVertical: 15, borderRadius: 6, backgroundColor: "#484FA3" }}
-                            titleStyle={{ fontFamily: "Pop600" }}
+                            buttonStyle={styles.coloredBtn}
+                            titleStyle={{ fontFamily: "Pop600", fontSize: 16 }}
                             onPress={() => { navigation.navigate('genderSelect') }}
                         />
                     </Col>

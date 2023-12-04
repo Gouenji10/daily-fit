@@ -27,7 +27,7 @@ export default function MonitoringScreen({ navigation }) {
         { value: 20, label: 'S', frontColor: "#F44040" },
     ];
     return (
-        <SafeAreaView style={[styles.screenContainer, { paddingTop: 20 }]}>
+        <SafeAreaView style={[styles.screenContainer]}>
             <ScrollView contentContainerStyle={{ paddingTop: 20 }}>
                 <HeaderComp />
                 <View style={{ paddingHorizontal: 20 }}>

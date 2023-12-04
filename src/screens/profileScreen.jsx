@@ -1,64 +1,33 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, Text } from 'react-native'
 import { styles } from '../styles'
-import { Col, Grid, Row } from 'react-native-easy-grid'
+import { Col, Row } from 'react-native-easy-grid'
 import { Avatar, ListItem } from '@rneui/themed'
 
 export default function ProfileScreen() {
     return (
-        <SafeAreaView style={[styles.screenContainer, { paddingTop: 20 }]}>
+        <SafeAreaView style={[styles.screenContainer]}>
             <ScrollView contentContainerStyle={{ paddingTop: 20, paddingHorizontal: 20 }}>
                 <Row>
                     <Col style={{ alignItems: 'center' }}>
                         <Avatar
                             size={128}
                             rounded
-                            source={{ uri: "https://randomuser.me/api/portraits/men/36.jpg" }}
+                            source={{ uri: "https://randomuser.me/api/portraits/men/18.jpg" }}
                             containerStyle={{ marginVertical: 20 }}
                         />
-                        <Text
-                            style={{
-                                fontFamily: "Pop600",
-                                fontSize: 20,
-                                color: "#303030",
-                                textAlign: "center",
-                            }}
-                        >
-                            Gouenji Shuuya
-                        </Text>
-                        <Text
-                            style={{
-                                color: "#8C8C8C",
-                                fontSize: 14,
-                                fontFamily: "Pop400",
-                                letterSpacing: -0.14
-                            }}
-                        >
-                            Lose Weight Mode
-                        </Text>
+                        <Text style={styles.profileUserTitle}> Gouenji Shuuya</Text>
+                        <Text style={styles.profileUserSubTitle}> Lose Weight Mode </Text>
                     </Col>
                 </Row>
-                <Row size={65}>
+                <Row>
                     <Col>
                         <ListItem>
                             <ListItem.Content>
-                                <ListItem.Title
-                                    style={{
-                                        color: "#303030",
-                                        fontFamily: "Pop500",
-                                        fontSize: 18,
-                                        letterSpacing: -0.16
-                                    }}
-                                >
+                                <ListItem.Title style={styles.profileItemTitle}>
                                     Edit Profile
                                 </ListItem.Title>
-                                <ListItem.Subtitle
-                                    style={{
-                                        fontFamily: "Pop400",
-                                        color: "#8C8C8C",
-                                        letterSpacing: -0.14
-                                    }}
-                                >
+                                <ListItem.Subtitle style={styles.profileItemSubTitle}>
                                     Edit name, age, weight, height
                                 </ListItem.Subtitle>
                             </ListItem.Content>
@@ -66,23 +35,10 @@ export default function ProfileScreen() {
                         </ListItem>
                         <ListItem>
                             <ListItem.Content>
-                                <ListItem.Title
-                                    style={{
-                                        color: "#303030",
-                                        fontFamily: "Pop500",
-                                        fontSize: 18,
-                                        letterSpacing: -0.16
-                                    }}
-                                >
+                                <ListItem.Title style={styles.profileItemTitle}>
                                     Change Goal and Activities
                                 </ListItem.Title>
-                                <ListItem.Subtitle
-                                    style={{
-                                        fontFamily: "Pop400",
-                                        color: "#8C8C8C",
-                                        letterSpacing: -0.14
-                                    }}
-                                >
+                                <ListItem.Subtitle style={styles.profileItemSubTitle}>
                                     Change sport activities and goal mode
                                 </ListItem.Subtitle>
                             </ListItem.Content>
@@ -90,23 +46,10 @@ export default function ProfileScreen() {
                         </ListItem>
                         <ListItem>
                             <ListItem.Content>
-                                <ListItem.Title
-                                    style={{
-                                        color: "#303030",
-                                        fontFamily: "Pop500",
-                                        fontSize: 18,
-                                        letterSpacing: -0.16
-                                    }}
-                                >
+                                <ListItem.Title style={styles.profileItemTitle}>
                                     Change Password
                                 </ListItem.Title>
-                                <ListItem.Subtitle
-                                    style={{
-                                        fontFamily: "Pop400",
-                                        color: "#8C8C8C",
-                                        letterSpacing: -0.14
-                                    }}
-                                >
+                                <ListItem.Subtitle style={styles.profileItemSubTitle}>
                                     Change or reset the password
                                 </ListItem.Subtitle>
                             </ListItem.Content>
@@ -114,23 +57,10 @@ export default function ProfileScreen() {
                         </ListItem>
                         <ListItem>
                             <ListItem.Content>
-                                <ListItem.Title
-                                    style={{
-                                        color: "#303030",
-                                        fontFamily: "Pop500",
-                                        fontSize: 18,
-                                        letterSpacing: -0.16
-                                    }}
-                                >
+                                <ListItem.Title style={styles.profileItemTitle}>
                                     Help Center
                                 </ListItem.Title>
-                                <ListItem.Subtitle
-                                    style={{
-                                        fontFamily: "Pop400",
-                                        color: "#8C8C8C",
-                                        letterSpacing: -0.14
-                                    }}
-                                >
+                                <ListItem.Subtitle style={styles.profileItemSubTitle} >
                                     If you had a problem, call us
                                 </ListItem.Subtitle>
                             </ListItem.Content>
@@ -138,23 +68,10 @@ export default function ProfileScreen() {
                         </ListItem>
                         <ListItem>
                             <ListItem.Content>
-                                <ListItem.Title
-                                    style={{
-                                        color: "#303030",
-                                        fontFamily: "Pop500",
-                                        fontSize: 18,
-                                        letterSpacing: -0.16
-                                    }}
-                                >
+                                <ListItem.Title style={styles.profileItemTitle}>
                                     Privacy Policy
                                 </ListItem.Title>
-                                <ListItem.Subtitle
-                                    style={{
-                                        fontFamily: "Pop400",
-                                        color: "#8C8C8C",
-                                        letterSpacing: -0.14
-                                    }}
-                                >
+                                <ListItem.Subtitle style={styles.profileItemSubTitle}>
                                     To find out the rules here
                                 </ListItem.Subtitle>
                             </ListItem.Content>

@@ -18,15 +18,15 @@ export default function IntroScreen({ navigation }) {
                     <Col style={{ paddingHorizontal: 20 }}>
                         <Button
                             title={'Get Started'}
-                            buttonStyle={{ marginBottom: 20, paddingVertical: 15, borderRadius: 6, backgroundColor: "#484FA3" }}
-                            titleStyle={{ fontFamily: "Pop600" }}
+                            buttonStyle={styles.coloredBtn}
+                            titleStyle={{ fontFamily: "Pop600", fontSize: 16 }}
                             onPress={() => navigation.navigate('register')}
                         />
                         <Button
                             title={'Sign In'}
                             type="outline"
-                            buttonStyle={{ paddingVertical: 15, borderRadius: 6, borderColor: "#484FA3" }}
-                            titleStyle={{ fontFamily: "Pop600", color: "#484FA3" }}
+                            buttonStyle={styles.outlineBtn}
+                            titleStyle={{ fontFamily: "Pop600", color: "#484FA3", fontSize: 16 }}
                             onPress={() => navigation.navigate('login')}
                         />
                     </Col>
