@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
-import { Image, Pressable, SafeAreaView, Text, View } from 'react-native'
+import { Image, Pressable, SafeAreaView, Text, ToastAndroid, View } from 'react-native'
 import { styles } from '../../styles'
-import { Button, Icon } from '@rneui/themed'
+import { Button, } from '@rneui/themed'
 import { Col, Grid, Row } from 'react-native-easy-grid';
+import { userStore } from '../../store/useAuthStore';
 
 export default function GoalScreen({ navigation }) {
+    const { info, setInfo } = userStore()
     const [goal, setGoal] = useState('')
 
+    const handleOnContinue = () => {
+        if (goal) {
+            setInfo({ ...info, ['goal']: goal, ['nextScreen']: 'activitySelect' })
+            navigation.navigate('activitySelect')
+        } else {
+            ToastAndroid.show('Please add your goal.', ToastAndroid.SHORT)
+        }
+    }
     return (
         <SafeAreaView style={styles.screenContainer}>
             <Grid style={{ paddingHorizontal: 20 }}>
@@ -19,11 +29,11 @@ export default function GoalScreen({ navigation }) {
                     <Col>
                         <View
                             style={[styles.goalItem, {
-                                backgroundColor: goal === 'loseWeight' ? "#F4F4F7" : "white",
-                                borderColor: goal === 'loseWeight' ? "#484FA3" : "white",
+                                backgroundColor: goal === 'Lose Weight' ? "#F4F4F7" : "white",
+                                borderColor: goal === 'Lose Weight' ? "#484FA3" : "white",
                             }]}
                         >
-                            <Pressable onPress={() => { setGoal('loseWeight') }}>
+                            <Pressable onPress={() => { setGoal('Lose Weight') }}>
                                 <View style={styles.goalItemImageWrapper}>
                                     <Image source={require('../../../assets/images/goal-1.png')} />
                                     <Text style={styles.goalItemTitle}>Lose Weight</Text>
@@ -33,11 +43,11 @@ export default function GoalScreen({ navigation }) {
                         </View>
                         <View
                             style={[styles.goalItem, {
-                                backgroundColor: goal === "gainWeight" ? "#F4F4F7" : "white",
-                                borderColor: goal === "gainWeight" ? "#484FA3" : "white"
+                                backgroundColor: goal === "Gain Weight" ? "#F4F4F7" : "white",
+                                borderColor: goal === "Gain Weight" ? "#484FA3" : "white"
                             }]}
                         >
-                            <Pressable onPress={() => { setGoal('gainWeight') }}>
+                            <Pressable onPress={() => { setGoal('Gain Weight') }}>
                                 <View style={styles.goalItemImageWrapper}>
                                     <Image source={require('../../../assets/images/goal-2.png')} />
                                     <Text style={styles.goalItemTitle}>Gain Weight</Text>
@@ -47,11 +57,11 @@ export default function GoalScreen({ navigation }) {
                         </View>
                         <View
                             style={[styles.goalItem, {
-                                backgroundColor: goal === 'gainMuscle' ? "#F4F4F7" : "white",
-                                borderColor: goal === 'gainMuscle' ? "#484FA3" : "white"
+                                backgroundColor: goal === 'Gain Muscle' ? "#F4F4F7" : "white",
+                                borderColor: goal === 'Gain Muscle' ? "#484FA3" : "white"
                             }]}
                         >
-                            <Pressable onPress={() => { setGoal('gainMuscle') }}>
+                            <Pressable onPress={() => { setGoal('Gain Muscle') }}>
                                 <View style={styles.goalItemImageWrapper}>
                                     <Image source={require('../../../assets/images/goal-3.png')} />
                                     <Text style={styles.goalItemTitle}>Gain Muscle</Text>
@@ -67,7 +77,7 @@ export default function GoalScreen({ navigation }) {
                             title={'Continue'}
                             buttonStyle={styles.coloredBtn}
                             titleStyle={{ fontFamily: "Pop600", fontSize: 16 }}
-                            onPress={() => { navigation.navigate('activitySelect') }}
+                            onPress={handleOnContinue}
                         />
                     </Col>
                 </Row>

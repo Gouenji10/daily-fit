@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Image, Pressable, SafeAreaView, Text, View } from 'react-native'
+import { Image, Pressable, SafeAreaView, Text, ToastAndroid, View } from 'react-native'
 import { styles } from '../../styles'
 import { Button } from '@rneui/themed'
 import { Col, Grid, Row } from 'react-native-easy-grid';
+import { userStore } from '../../store/useAuthStore';
 
 export default function ActivityScreen({ navigation }) {
 
+    const { info, setInfo } = userStore()
     const [userActivities, setUserActivities] = useState({
         abs: false,
         hulla_hoop: false,
@@ -16,8 +18,26 @@ export default function ActivityScreen({ navigation }) {
         kettlebell: false,
         pull_up: false,
     })
+
+    function checkActivityCount(obj) {
+        let count = 0
+        for (var o in obj)
+            if (obj[o]) count++;
+
+        return count;
+    }
     const onHandleChange = (text, value) => {
         setUserActivities({ ...userActivities, [text]: !value })
+    }
+
+    const handleOnContinue = () => {
+        const count = checkActivityCount(userActivities)
+        if (count <= 4) {
+            setInfo({ ...info, ['activity']: userActivities, ['nextScreen']: 'recommendation' })
+            navigation.navigate('bottomMenu', { screen: "recommendation" })
+        } else {
+            ToastAndroid.show('Please add four or more Physical Activity.', ToastAndroid.SHORT)
+        }
     }
 
     const activities = [
@@ -97,7 +117,7 @@ export default function ActivityScreen({ navigation }) {
                             title={'Continue'}
                             buttonStyle={styles.coloredBtn}
                             titleStyle={{ fontFamily: "Pop600" }}
-                            onPress={() => { navigation.navigate('bottomMenu', { screen: "recommendation" }) }}
+                            onPress={handleOnContinue}
                         />
                     </Col>
                 </Row>

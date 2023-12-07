@@ -3,7 +3,7 @@ import Navigation from './src/navigation';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react';
-import { View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -17,6 +17,8 @@ export default function App() {
 
 	useEffect(() => {
 		async function prepare() {
+			// await AsyncStorage.clear()
+			
 			await SplashScreen.preventAutoHideAsync();
 		}
 		prepare()

@@ -4,9 +4,10 @@ import { Button, Input } from "@rneui/themed";
 import { Col, Row } from "react-native-easy-grid";
 import { useState } from "react";
 import { Icon } from "@rneui/base";
+import { userStore } from "../store/useAuthStore";
 
 export default function LoginScreen({ navigation }) {
-
+    const { user, login } = userStore()
     const [inputs, setInputs] = useState({ email: "", password: "" })
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
@@ -18,25 +19,37 @@ export default function LoginScreen({ navigation }) {
         setInputs({ ...inputs, [input]: text })
     }
 
-    const handleOnSubmit = () => {
+    const handleOnSubmit = async () => {
         const errors = {};
         if (!inputs.email) {
-            errors.email = 'Email address is required';
+            errors.email = true;
+        } else if (!/\S+@\S+\.\S+/.test(inputs.email)) {
+            errors.email = true;
+            ToastAndroid.show('Please enter valid email address.', ToastAndroid.SHORT)
         }
         if (!inputs.password) {
-            errors.password = 'Password is required';
+            errors.password = true;
+        } else if (inputs.password.length < 6) {
+            errors.password = true;
+            ToastAndroid.show('Password must be of 6 letters or longer.', ToastAndroid.SHORT)
         }
         setErrors(errors);
-        ToastAndroid.show('Please check the highlighted input fields.', ToastAndroid.SHORT)
+
         if (Object.keys(errors).length === 0) {
             try {
-                navigation.navigate('bottomMenu', { screen: "recommendation" })
+                if (user.email === inputs.email && user.password === inputs.password) {
+                    login()
+                    navigation.navigate('bottomMenu', { screen: "recommendation" })
+                }else{
+                    ToastAndroid.show('Entered Credentials doesn\'t match.', ToastAndroid.SHORT)
+                }
             } catch (error) {
                 console.error(error);
             }
+        } else {
+            ToastAndroid.show('Please check the highlighted input fields.', ToastAndroid.SHORT)
         }
     }
-
     return (
         <KeyboardAvoidingView style={styles.screenContainer}>
             <ScrollView contentContainerStyle={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
@@ -52,6 +65,8 @@ export default function LoginScreen({ navigation }) {
                                     inputStyle={styles.inputStyle}
                                     value={inputs.email}
                                     onChangeText={(text) => { handleOnchange(text, 'email') }}
+                                    autoCapitalize="none"
+                                    autoComplete="email"
                                 />
                                 <Input
                                     placeholder='Password...'
@@ -62,6 +77,7 @@ export default function LoginScreen({ navigation }) {
                                     secureTextEntry={!showPassword}
                                     value={inputs.password}
                                     onChangeText={(text) => { handleOnchange(text, 'password') }}
+                                    autoCapitalize="none"
                                 />
                                 <Button
                                     title={'Sign In'}

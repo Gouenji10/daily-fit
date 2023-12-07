@@ -1,11 +1,25 @@
 import React, { useState } from 'react'
-import { Image, Pressable, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Pressable, SafeAreaView, Text, ToastAndroid, View } from 'react-native'
 import { styles } from '../../styles'
 import { Button } from '@rneui/themed'
 import { Col, Grid, Row } from 'react-native-easy-grid';
+import { userStore } from '../../store/useAuthStore';
 
 export default function GenderScreen({ navigation }) {
+    const { info, setInfo } = userStore()
     const [gender, setGender] = useState('')
+
+    const handleOnContinue = () => {
+        if (gender) {
+            setInfo({ ...info, ['gender']: gender, ['nextScreen']: 'goalSelect' })
+            navigation.navigate('goalSelect')
+        } else {
+            ToastAndroid.show('Please add your gender.', ToastAndroid.SHORT)
+        }
+    }
+
+
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <Grid style={{ paddingHorizontal: 20 }}>
@@ -66,7 +80,7 @@ export default function GenderScreen({ navigation }) {
                             title={'Continue'}
                             buttonStyle={styles.coloredBtn}
                             titleStyle={{ fontFamily: "Pop600", fontSize: 16 }}
-                            onPress={() => { navigation.navigate('goalSelect') }}
+                            onPress={handleOnContinue}
                         />
                     </Col>
                 </Row>

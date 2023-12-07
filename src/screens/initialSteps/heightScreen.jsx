@@ -1,11 +1,25 @@
-import { SafeAreaView, Text } from 'react-native'
+import { SafeAreaView, Text, ToastAndroid } from 'react-native'
 import { styles } from '../../styles'
 import { Button } from '@rneui/themed'
 import WheelPickerExpo from 'react-native-wheel-picker-expo';
 import { Col, Grid, Row } from 'react-native-easy-grid';
+import { userStore } from '../../store/useAuthStore';
+import { useState } from 'react';
 
 export default function HeightScreen({ navigation }) {
     const CITIES = Array.from({ length: 200 - 49 }, (_, index) => index + 50);
+    const { info, setInfo } = userStore()
+    const [height, setHeight] = useState('');
+
+    const handleOnContinue = () => {
+        if (height) {
+            setInfo({ ...info, ['height']: height, ['nextScreen']: 'ageSelect' })
+            navigation.navigate('ageSelect')
+        } else {
+            ToastAndroid.show('Please add your body height.', ToastAndroid.SHORT)
+        }
+    }
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <Grid style={{ paddingHorizontal: 20 }}>
@@ -20,7 +34,7 @@ export default function HeightScreen({ navigation }) {
                         height={300}
                         initialSelectedIndex={50}
                         items={CITIES.map(name => ({ label: name, value: '' }))}
-                        onChange={({ item }) => { }}
+                        onChange={({ item }) => { setHeight(item) }}
                         renderItem={(props) => (
                             <Text
                                 style={[
@@ -49,7 +63,7 @@ export default function HeightScreen({ navigation }) {
                             title={'Continue'}
                             buttonStyle={styles.coloredBtn}
                             titleStyle={{ fontFamily: "Pop600", fontSize: 16 }}
-                            onPress={() => { navigation.navigate('ageSelect') }}
+                            onPress={handleOnContinue}
                         />
                     </Col>
                 </Row>

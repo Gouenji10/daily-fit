@@ -1,10 +1,13 @@
 import { Image, KeyboardAvoidingView, SafeAreaView, ScrollView, Text, ToastAndroid, TouchableOpacity, View } from "react-native";
 import { styles } from '../styles'
 import { Button, Icon, Input } from "@rneui/themed";
-import { Col, Grid, Row } from "react-native-easy-grid";
+import { Col, Row } from "react-native-easy-grid";
 import { useState } from "react";
+import { userStore } from "../store/useAuthStore";
 
 export default function RegisterScreen({ navigation }) {
+
+    const { setUser } = userStore()
 
     const [inputs, setInputs] = useState({ name: "", email: "", password: "" })
     const [errors, setErrors] = useState({});
@@ -17,25 +20,37 @@ export default function RegisterScreen({ navigation }) {
         setInputs({ ...inputs, [input]: text })
     }
 
-    const handleOnSubmit = () => {
+    const handleOnSubmit = async () => {
         const errors = {};
         if (!inputs.name) {
-            errors.name = 'name is required';
+            errors.name = true;
         }
+
         if (!inputs.email) {
-            errors.email = 'Email address is required';
+            errors.email = true;
+        }
+        else if (!/\S+@\S+\.\S+/.test(inputs.email)) {
+            errors.email = true;
+            ToastAndroid.show('Please enter valid email address.', ToastAndroid.SHORT)
         }
         if (!inputs.password) {
-            errors.password = 'Password is required';
+            errors.password = true;
+        }
+        else if (inputs.password.length < 6) {
+            errors.password = true;
+            ToastAndroid.show('Password must be of 6 letters or longer.', ToastAndroid.SHORT)
         }
         setErrors(errors);
-        ToastAndroid.show('Please check the highlighted input fields.', ToastAndroid.SHORT)
+
         if (Object.keys(errors).length === 0) {
             try {
+                setUser({ ...inputs })
                 navigation.navigate('weightSelect')
             } catch (error) {
                 console.error(error);
             }
+        } else {
+            ToastAndroid.show('Please check the highlighted input fields.', ToastAndroid.SHORT)
         }
     }
     return (
@@ -53,6 +68,7 @@ export default function RegisterScreen({ navigation }) {
                                     inputStyle={styles.inputStyle}
                                     value={inputs.name}
                                     onChangeText={(text) => { handleOnchange(text, 'name') }}
+                                    autoComplete="name"
                                 />
                                 <Input
                                     placeholder='Email Address...'
@@ -61,6 +77,8 @@ export default function RegisterScreen({ navigation }) {
                                     inputStyle={styles.inputStyle}
                                     value={inputs.email}
                                     onChangeText={(text) => { handleOnchange(text, 'email') }}
+                                    autoCapitalize="none"
+                                    autoComplete="email"
                                 />
                                 <Input
                                     placeholder='Password...'
@@ -70,6 +88,7 @@ export default function RegisterScreen({ navigation }) {
                                     rightIcon={<Icon name={showPassword ? 'eye-off' : 'eye'} type="feather" color={'silver'} onPress={() => { toggleShowPassword() }} />}
                                     secureTextEntry={!showPassword}
                                     value={inputs.password}
+                                    autoCapitalize="none"
                                     onChangeText={(text) => { handleOnchange(text, 'password') }}
                                 />
                                 <Button

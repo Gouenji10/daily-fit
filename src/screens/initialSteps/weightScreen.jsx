@@ -1,10 +1,27 @@
-import React from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView, Text, ToastAndroid, View } from 'react-native'
 import { styles } from '../../styles'
 import { Button } from '@rneui/themed'
 import { RulerPicker } from 'react-native-ruler-picker';
 import { Col, Grid, Row } from 'react-native-easy-grid';
+import { userStore } from '../../store/useAuthStore';
+
+
 export default function WeightScreen({ navigation }) {
+
+    const { info, setInfo } = userStore()
+    const [weight, setWeight] = useState('');
+    const handeleOnContinue = () => {
+        if (weight) {
+            setInfo({ ...info, ['weight']: weight, ['nextScreen']: 'heightSelect' })
+            navigation.navigate('heightSelect')
+        } else {
+            ToastAndroid.show('Please add your body weight.', ToastAndroid.SHORT)
+        }
+
+    }
+
+
     return (
         <SafeAreaView style={styles.screenContainer}>
             <Grid style={{ paddingHorizontal: 20 }}>
@@ -20,7 +37,7 @@ export default function WeightScreen({ navigation }) {
                         step={1}
                         initialValue={50}
                         onValueChange={(number) => { }}
-                        onValueChangeEnd={(number) => { }}
+                        onValueChangeEnd={(number) => { setWeight(number) }}
                         unit="Kg"
                         valueTextStyle={{ height: 100, fontFamily: "Pop400", color: "#303030", fontSize: 40 }}
                         unitTextStyle={{ fontFamily: "Pop400", color: "#8C8C8C", fontSize: 14, letterSpacing: -2 }}
@@ -44,7 +61,7 @@ export default function WeightScreen({ navigation }) {
                             title={'Continue'}
                             buttonStyle={styles.coloredBtn}
                             titleStyle={{ fontFamily: "Pop600", fontSize: 16 }}
-                            onPress={() => { navigation.navigate('heightSelect') }}
+                            onPress={handeleOnContinue}
                         />
                     </Col>
                 </Row>

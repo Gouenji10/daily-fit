@@ -1,16 +1,15 @@
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import { styles } from "../styles";
 import IntroComp from "../components/introComp";
 import { Button } from "@rneui/themed";
 import { Col, Grid, Row } from "react-native-easy-grid";
 
 export default function IntroScreen({ navigation }) {
-
     return (
         <SafeAreaView style={styles.screenContainer}>
             <Grid style={{ justifyContent: "space-between" }}>
                 <Row size={75}>
-                    <View style={{ position: "relative", flex: 1 }}>
+                    <View style={{ position: "relative", flex: 1 }}>                       
                         <IntroComp />
                     </View>
                 </Row>

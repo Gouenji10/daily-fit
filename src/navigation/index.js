@@ -18,12 +18,16 @@ import { Icon } from "@rneui/themed";
 import ProfileScreen from "../screens/profileScreen";
 import MonitoringScreen from "../screens/monitoringScreen";
 import AchievementScreen from "../screens/AchievementScreen";
+import { userStore } from "../store/useAuthStore";
 
 export default function Navigation() {
+    const { loggedIn } = userStore()
+    const initialRoute = loggedIn ? "bottomMenu" : "intro"
     const BottomMenu = createBottomTabNavigator()
     function BottomTabNavigator() {
         return (
             <BottomMenu.Navigator
+                initialRouteName="recommendation"
                 screenOptions={{
                     tabBarStyle: { height: 70 },
                     tabBarLabelStyle: { top: -12, fontFamily: "Pop500" },
@@ -80,7 +84,7 @@ export default function Navigation() {
     function RootNavigator() {
         return (
             <Stack.Navigator
-                initialRouteName="intro"
+                initialRouteName={initialRoute}
                 screenOptions={{
                     animation: "slide_from_right",
                     headerTitleStyle: {
